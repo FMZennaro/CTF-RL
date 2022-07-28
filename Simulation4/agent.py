@@ -47,13 +47,15 @@ class Agent():
         self.steps = 0
         self.rewards = 0
                 
-    def run_episode(self):
+    def run_episode(self,max_iter=np.inf):
         _,_,self.terminated,s = self.env.reset()
         if(self.verbose): print('\nHACKER: Resetting...')
         if(self.verbose): print(s)
         
         while not(self.terminated):
             self.step()
+            if self.steps >= max_iter:
+                self.terminated = True
             
     def step(self):
         self.steps = self.steps+1
